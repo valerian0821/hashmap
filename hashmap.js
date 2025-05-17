@@ -28,6 +28,15 @@ class Hashmap {
         this.buckets[index].append(key, value);
       }
     }
+    const hashMapSize = this.length();
+    if (hashMapSize >= this.loadFactor * this.capacity) {
+      const pairs = this.entries();
+      this.capacity = this.capacity * 2;
+      this.buckets = Array(capacity).fill(null);
+      for (let i = 0; i < pairs.length; i++) {
+        this.set(pairs[i][0], pairs[i][1]);
+      }
+    }
   }
 
   get(key) {
